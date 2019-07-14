@@ -1,3 +1,4 @@
+import drawClass
 import os
 from psd_tools2 import PSDImage
 import re
@@ -48,7 +49,42 @@ def removeTmpDir():
 
 
 def createDictClass(flList):
-    
+    clssList = {"Класс": [], }
+    for fl in flList:
+        i = fl.split("_")
+        try:
+            if i[5] not in clssList.keys():
+                clssList[i[5]] = []
+                clssList[i[5]].append(fl)
+            else:
+                clssList[i[5]].append(fl)
+        except IndexError:
+            for key, val in clssList.items():
+                if key == "Класс":
+                    val.append(fl)
+    return clssList
+
+
+def generatePDF(dictOfClass):
+    for key, val in dictOfClass.items():
+        cell = 1
+        count = 0
+        page = drawClass.drawPage()
+        for v in val:
+            if cell == 1:
+                page = drawClass.drawPage()
+                page.drawNameObject("Иркутск")
+                page.drawOfKlass(key)
+                page.changeFont(fontSize=60)
+            page.drawProductParametrs(cell)
+            page.addImg(tmpDir + "/" + v, cell)
+            count += 1
+            if cell == 4 or count == len(val):
+                page.savePage()
+                cell = 1
+            cell += 1
+
+
 
 
 def pyMain(folder='/media/work_part/python/Ижевск 40 ш 1в досьемка/'):
@@ -57,7 +93,8 @@ def pyMain(folder='/media/work_part/python/Ижевск 40 ш 1в досьемк
     #psdFl = searchFl("psd")
     #convertPsd(psdFl, tmpDir)
     jpgFl = searchFl("jpeg", "tmp")
-    createDictClass(jpgFl)
+    dictOfClass = createDictClass(jpgFl)
+    generatePDF(dictOfClass)
     # removeTmpDir()
 
 

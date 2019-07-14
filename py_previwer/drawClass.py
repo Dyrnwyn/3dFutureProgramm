@@ -4,13 +4,16 @@ from PIL import Image, ImageDraw, ImageFont
 class drawPage(object):
     """docstring for drawPage"""
 
-    def __init__(self, fontName="Font/a_Futurica.ttf"):
+    def __init__(self, fontName="/media/work_part/python/previewer/py_previwer/Font/a_Futurica.ttf"):
         # Инициализируем новый лист, шрифт
         self.page = Image.new("RGB", (2480, 3508), color=(255, 255, 255))
         self.draw = ImageDraw.Draw(self.page, "RGB")
         self.font = ImageFont.truetype(fontName, 40)
+        self.drawLinePage()
+        self.drawTitle()
+        self.changeFont(fontSize=100)
 
-    def changeFont(self, fontName="Font/a_Futurica.ttf", fontSize=40):
+    def changeFont(self, fontName="/media/work_part/python/previewer/py_previwer/Font/a_Futurica.ttf", fontSize=40):
         self.font = ImageFont.truetype(fontName, fontSize)
 
     def drawLinePage(self):  # Метод разметки страницы на ячейки
@@ -79,9 +82,9 @@ class drawPage(object):
 if __name__ == "__main__":
     for i in range(10):
         page1 = drawPage()
-        page1.drawLinePage()
-        page1.drawTitle()
-        page1.changeFont(fontSize=100)
+        # page1.drawLinePage()
+        # page1.drawTitle()
+        # page1.changeFont(fontSize=100)
         page1.drawNameObject("Новосибирск 111221")
         page1.drawOfKlass("7б класс")
         page1.changeFont(fontSize=60)

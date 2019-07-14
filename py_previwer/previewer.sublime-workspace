@@ -4,6 +4,50 @@
 		"selected_items":
 		[
 			[
+				"dr",
+				"drawClass\tmodule"
+			],
+			[
+				"tm",
+				"tmpDir\tstatement"
+			],
+			[
+				"drw",
+				"drawTitle\tfunction"
+			],
+			[
+				"dic",
+				"dictOfClass\tparam"
+			],
+			[
+				"dict",
+				"dictOfClass"
+			],
+			[
+				"fl",
+				"fl\tstatement"
+			],
+			[
+				"c",
+				"clssList\tstatement"
+			],
+			[
+				"cre",
+				"createDictClass\tfunction"
+			],
+			[
+				"jp",
+				"jpgFl\tstatement"
+			],
+			[
+				"re",
+				"reverse\tfunction"
+			],
+			[
+				"remov",
+				"removeTmpDir\tfunction"
+			],
+			[
 				"a",
 				"addImg\tfunction"
 			],
@@ -14,10 +58,6 @@
 			[
 				"drawP",
 				"drawProductParametrs\tfunction"
-			],
-			[
-				"dic",
-				"dictXY\tstatement"
 			],
 			[
 				"font",
@@ -44,16 +84,8 @@
 				"page1\tstatement"
 			],
 			[
-				"drw",
-				"draw"
-			],
-			[
 				"lo",
 				"load_default\tfunction"
-			],
-			[
-				"dr",
-				"draw\tstatement"
 			],
 			[
 				"w",
@@ -104,20 +136,12 @@
 				"removeTmpDir\tfunction"
 			],
 			[
-				"re",
-				"remove\tfunction"
-			],
-			[
 				"file",
 				"files\tstatement"
 			],
 			[
 				"wa",
 				"walk\tfunction"
-			],
-			[
-				"tm",
-				"tmpFolder\tparam"
 			],
 			[
 				"m",
@@ -251,7 +275,16 @@
 			"file": "drawClass.py",
 			"settings":
 			{
-				"buffer_size": 3142,
+				"buffer_size": 3700,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "previwer.py",
+			"settings":
+			{
+				"buffer_size": 2678,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -322,6 +355,8 @@
 	],
 	"file_history":
 	[
+		"/media/work_part/python/previewer/py_previwer/__init__",
+		"/media/work_part/python/previewer/py_previwer/1.pdf",
 		"/media/work_part/python/previewer/py_previwer/previewer.sublime-project",
 		"/media/work_part/python/previewer/py_previwer/previwer.py",
 		"/media/work_part/python/previewer/py_previwer/py_previwer.sublime-project",
@@ -408,7 +443,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -417,15 +452,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3142,
+						"buffer_size": 3700,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3010,
-								3010
+								2327,
+								2327
 							]
 						],
 						"settings":
@@ -435,7 +470,37 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 714.0,
+						"translation.y": 816.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "previwer.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2678,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2334,
+								2334
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 980.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
