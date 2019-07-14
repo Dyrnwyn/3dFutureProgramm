@@ -1,0 +1,8 @@
+*.pdf
+*.jpg
+*.png
+*.sublime-project
+*.pyc
+*.jpeg
+*.sublime-workspace
+*/__pycache__/*

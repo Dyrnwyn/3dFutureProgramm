@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"a",
+				"addImg\tfunction"
+			],
+			[
+				"Ima",
+				"Image\tmodule"
+			],
+			[
 				"drawP",
 				"drawProductParametrs\tfunction"
 			],
@@ -54,10 +62,6 @@
 			[
 				"fi",
 				"fill\tparam"
-			],
-			[
-				"Ima",
-				"ImageDraw\tmodule"
 			],
 			[
 				"new",
@@ -216,10 +220,6 @@
 				"background-color"
 			],
 			[
-				"a",
-				"auto"
-			],
-			[
 				"ovw",
 				"overflow"
 			],
@@ -251,16 +251,8 @@
 			"file": "drawClass.py",
 			"settings":
 			{
-				"buffer_size": 2773,
+				"buffer_size": 3142,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "previewer.sublime-project",
-			"settings":
-			{
-				"buffer_size": 550,
 				"line_ending": "Unix"
 			}
 		}
@@ -416,7 +408,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -425,15 +417,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2773,
+						"buffer_size": 3142,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								103,
-								103
+								3010,
+								3010
 							]
 						],
 						"settings":
@@ -443,36 +435,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "previewer.sublime-project",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 550,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 714.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -514,7 +477,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 275.0
+		"height": 217.0
 	},
 	"output.find_results":
 	{
