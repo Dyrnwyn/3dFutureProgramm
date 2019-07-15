@@ -67,10 +67,12 @@ def createDictClass(flList):
 
 def generatePDF(dictOfClass):
     for key, val in dictOfClass.items():
-        cell = 1
+        cell = 0
         count = 0
         page = drawClass.drawPage()
         for v in val:
+            cell += 1
+            count += 1
             if cell == 1:
                 page = drawClass.drawPage()
                 page.drawNameObject("Иркутск")
@@ -78,13 +80,10 @@ def generatePDF(dictOfClass):
                 page.changeFont(fontSize=60)
             page.drawProductParametrs(cell)
             page.addImg(tmpDir + "/" + v, cell)
-            count += 1
             if cell == 4 or count == len(val):
                 page.savePage()
-                cell = 1
-            cell += 1
-
-
+                page.__init__()
+                cell = 0
 
 
 def pyMain(folder='/media/work_part/python/Ижевск 40 ш 1в досьемка/'):
