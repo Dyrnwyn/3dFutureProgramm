@@ -40,7 +40,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/media/work_part/python/py_previewer"
+VIRTUAL_ENV="/media/work_part/python/previewer"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

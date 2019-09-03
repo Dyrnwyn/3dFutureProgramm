@@ -1,4 +1,4 @@
-#!/media/work_part/python/py_previewer/bin/python
+#!/media/work_part/python/previewer/bin/python
 
 import sys
 import getopt

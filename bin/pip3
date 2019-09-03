@@ -1,4 +1,4 @@
-#!/media/work_part/python/py_previewer/bin/python3
+#!/media/work_part/python/previewer/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
