@@ -7,6 +7,7 @@ from os import sep
 
 
 
+
 tmpDir = 'tmp'
 
 
@@ -126,7 +127,6 @@ def pyMain(folder='/media/work_part/python/Ижевск 40 ш 1в досьемк
     dictOfClass = createDictClass(jpgFl)
     generatePDF(dictOfClass)
     removeTmpDir()
-
 
 if __name__ == "__main__":
     pyMain()
