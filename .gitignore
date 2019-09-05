@@ -6,3 +6,7 @@
 *.jpeg
 *.sublime-workspace
 */__pycache__/*
+bin
+include
+lib
+share
