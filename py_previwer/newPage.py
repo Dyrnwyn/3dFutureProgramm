@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 
-fontPath = "a_Futurica"
+fontPath = "/media/work_part/python/previewer/py_previwer/Font/a_Futurica.ttf"
 
 
 class drawPage(object):
