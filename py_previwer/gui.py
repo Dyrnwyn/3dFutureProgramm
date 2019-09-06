@@ -16,7 +16,7 @@ class guiInterface(QWidget):
         self.setWindowTitle("Превьювер")
         self.move(650, 490)
         self.grpboxPath = QGroupBox("Выберите объект", self)
-        self.grpboxObjectName = QGroupBox("Выберите объект", self)
+        self.grpboxObjectName = QGroupBox("Имя объекта для вывода в pdf", self)
         self.btn = QPushButton('Старт', self)
         self.rbtn = QPushButton('Обзор', self)
         self.qbtn = QPushButton('Выход', self)
@@ -42,24 +42,20 @@ class guiInterface(QWidget):
         grid = QGridLayout()
         grid.setSpacing(10)
         grid.addWidget(self.prgBar, 1, 0, 1, 2)
-        grid.addWidget(self.grpboxPath, 2, 0)
-        grid.addWidget(self.grpboxObjectName, 3, 0)
+        grid.addWidget(self.grpboxPath, 2, 0, 1, 2)
+        grid.addWidget(self.grpboxObjectName, 3, 0, 1, 2)
         grid.addWidget(self.btn, 6, 0)
         grid.addWidget(self.qbtn, 6, 1)
-
         self.setLayout(grid)
-
-
-
 
         self.show()
 
     def getPath(self):
         path = QFileDialog.getExistingDirectory()
         self.le.setText(path)
+        self.leObjectName.setText(path.split(os.sep)[-1])
 
     def generatePreview(self):
-        #previewer.pyMain(self.le.text())
         folder = self.le.text()
         os.chdir(folder)
         previewer.createTmpDir()
@@ -72,7 +68,7 @@ class guiInterface(QWidget):
         self.prgBar.setValue(70)
         dictOfClass = previewer.createDictClass(jpgFl)
         self.prgBar.setValue(80)
-        previewer.generatePDF(dictOfClass)
+        previewer.generatePDF(dictOfClass, self.leObjectName.text())
         self.prgBar.setValue(95)
         previewer.removeTmpDir()
         self.prgBar.setValue(100)

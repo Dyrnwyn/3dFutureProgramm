@@ -96,8 +96,8 @@ def createDictClass(flList):
     return dictSort(clssList)
 
 
-def generatePDF(dictOfClass):
-    objectName = os.getcwd().split(sep)[-1]
+def generatePDF(dictOfClass, objectName):
+    # objectName = os.getcwd().split(sep)[-1]
     for key, val in dictOfClass.items():
         cell = 0
         count = 0
