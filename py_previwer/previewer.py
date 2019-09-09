@@ -109,7 +109,6 @@ def generatePDF(dictOfClass, objectName):
                 page = newPage.drawPage()
                 page.drawNameObject(objectName)
                 page.drawOfKlass(key)
-                page.changeFont(fontSize=60)
             page.drawProductParametrs(v, cell)
             page.addImg(cell, tmpDir + sep + v)
             if cell == 4 or count == len(val):
