@@ -10,7 +10,7 @@ class drawPage(object):
         # Инициализируем новый лист, шрифт
         self.page = Image.new("RGB", (2480, 3508), color=(255, 255, 255))
         self.draw = ImageDraw.Draw(self.page, "RGB")
-        self.font = ImageFont.truetype(fontName, 40)
+        self.font = ImageFont.truetype(fontName, 30)
         self.drawLinePage()
         self.drawTitle()
         self.changeFont(fontSize=100)
@@ -32,6 +32,7 @@ class drawPage(object):
     def drawTitle(self):
         #  Метод в котором выводим в заголовке
         # "класс/группа" и "Наименование объекта"
+        self.changeFont(fontSize=35)
         self.draw.text((60, 30), "класс/группа", font=self.font, fill=0)
         fontWidth = self.font.getsize("Наименование Объекта")[0]
         self.draw.text((self.page.width / 2 - fontWidth / 2, 30),
@@ -39,18 +40,21 @@ class drawPage(object):
 
     def drawNameObject(self, nameObject="Без имени"):
         # В методе выводим название объекта
+        self.changeFont(fontSize=70)
         fontWidth = self.font.getsize(nameObject)[0]
         self.draw.text((self.page.width / 2 - fontWidth / 2, 100),
                        nameObject, font=self.font, fill=0)
 
     def drawOfKlass(self, nameKlass="00"):
         # Рисуем класс/группу
+        self.changeFont(fontSize=70)
         self.draw.text((60, 100), nameKlass, font=self.font, fill=0)
 
     def drawProductParametrs(self, flName, numbCell=1):
         # метод вывода информации об изделии
         # в ячейки
         # numbcell номер ячейки на листе, в который выводим данные
+        self.changeFont(fontSize=30)
         splitFlName = flName.split("_")
         try:
             if splitFlName[0] == "о":
@@ -80,10 +84,10 @@ class drawPage(object):
 
     def addImg(self, cell, imgPath):
         # метод вывода фото изделия в ячейки 
-        dictXY = {1: (120, 500),
-                  2: (1270, 500),
-                  3: (120, 2100),
-                  4: (1270, 2100)
+        dictXY = {1: (120, 425),
+                  2: (1270, 425),
+                  3: (120, 1950),
+                  4: (1270, 1950)
                   }
         img = Image.open(imgPath)
         self.page.paste(img, dictXY[cell])

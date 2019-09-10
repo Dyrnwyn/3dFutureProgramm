@@ -96,8 +96,8 @@ def createDictClass(flList):
     return dictSort(clssList)
 
 
-def generatePDF(dictOfClass):
-    objectName = os.getcwd().split(sep)[-1]
+def generatePDF(dictOfClass, objectName):
+    # objectName = os.getcwd().split(sep)[-1]
     for key, val in dictOfClass.items():
         cell = 0
         count = 0
@@ -109,7 +109,6 @@ def generatePDF(dictOfClass):
                 page = newPage.drawPage()
                 page.drawNameObject(objectName)
                 page.drawOfKlass(key)
-                page.changeFont(fontSize=60)
             page.drawProductParametrs(v, cell)
             page.addImg(cell, tmpDir + sep + v)
             if cell == 4 or count == len(val):
