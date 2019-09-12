@@ -33,12 +33,15 @@ def convertPsd(psdFl, tmpDir):
         pngFl = Image.open(tmpDir + sep + "tmp_file.png")
         rgb_png = pngFl.convert("RGB")
         x, y = rgb_png.size
-        if x >= y:
+        if x > y:
             width = baseSize
             height = int(width / x * y)
-        else:
+        elif y > x:
             height = baseSize
             width = int(height / y * x)
+        else:
+            height = 590
+            width = 590
         jpgFl = rgb_png.resize((width, height), Image.BICUBIC)
         jpgFl.save(tmpDir + sep + psdFlName[0:-4] + ".jpeg")
     os.remove(tmpDir + sep + "tmp_file.png")

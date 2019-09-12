@@ -53,7 +53,7 @@ class guiInterface(QWidget):
     def getPath(self):
         path = QFileDialog.getExistingDirectory()
         self.le.setText(path)
-        self.leObjectName.setText(path.split(os.sep)[-1])
+        self.leObjectName.setText(path.split("/")[-1])
 
     def generatePreview(self):
         folder = self.le.text()
