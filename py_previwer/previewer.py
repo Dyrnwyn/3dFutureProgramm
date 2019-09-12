@@ -1,11 +1,9 @@
 import newPage
 import os
-from psd_tools2 import PSDImage
+from psd_tools import PSDImage
 import re
 from PIL import Image
 from os import sep
-
-
 
 
 tmpDir = 'tmp'
