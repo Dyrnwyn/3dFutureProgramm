@@ -54,7 +54,7 @@ class drawPage(object):
         # метод вывода информации об изделии
         # в ячейки
         # numbcell номер ячейки на листе, в который выводим данные
-        self.changeFont(fontSize=30)
+        self.changeFont(fontSize=35)
         splitFlName = flName.split("_")
         try:
             if splitFlName[0] == "о":
@@ -84,10 +84,10 @@ class drawPage(object):
 
     def addImg(self, cell, imgPath):
         # метод вывода фото изделия в ячейки 
-        dictXY = {1: (120, 425),
-                  2: (1270, 425),
-                  3: (120, 1950),
-                  4: (1270, 1950)
+        dictXY = {1: (220, 425),
+                  2: (1370, 425),
+                  3: (220, 1950),
+                  4: (1370, 1950)
                   }
         img = Image.open(imgPath)
         self.page.paste(img, dictXY[cell])
