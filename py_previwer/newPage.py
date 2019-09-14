@@ -20,13 +20,13 @@ class drawPage(object):
 
     def drawLinePage(self):  # Разметка страницы на ячейки
         # -------------horizontal line--------------------
-        self.draw.line([(60, 400), (2420, 400)], fill=0, width=7)
-        self.draw.line([(60, 1924), (2420, 1924)], fill=0, width=7)
-        self.draw.line([(60, 3448), (2420, 3448)], fill=0, width=7)
+        self.draw.line([(60, 400), (2420, 400)], fill=0, width=5)
+        self.draw.line([(60, 1924), (2420, 1924)], fill=0, width=5)
+        self.draw.line([(60, 3448), (2420, 3448)], fill=0, width=5)
         # -------------vertical line----------------------
-        self.draw.line([(2420, 400), (2420, 3448)], fill=0, width=7)
-        self.draw.line([(1210, 400), (1210, 3448)], fill=0, width=7)
-        self.draw.line([(60, 400), (60, 3448)], fill=0, width=7)
+        self.draw.line([(2420, 400), (2420, 3448)], fill=0, width=5)
+        self.draw.line([(1210, 400), (1210, 3448)], fill=0, width=5)
+        self.draw.line([(60, 400), (60, 3448)], fill=0, width=5)
         self.draw.text((60, 40), "Class")
 
     def drawTitle(self):
@@ -54,7 +54,7 @@ class drawPage(object):
         # метод вывода информации об изделии
         # в ячейки
         # numbcell номер ячейки на листе, в который выводим данные
-        self.changeFont(fontSize=35)
+        self.changeFont(fontSize=45)
         splitFlName = flName.split("_")
         try:
             if splitFlName[0] == "о":
