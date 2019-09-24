@@ -27,6 +27,7 @@ class guiInterface(QWidget):
         self.rbtn.clicked.connect(self.getPath)
         self.qbtn.clicked.connect(self.close)
         self.btn.clicked.connect(self.generatePreview)
+        self.le.textChanged.connect(self.getObjectName)
         self.msgBox = QMessageBox(self)
         self.msgBox.setText("Готово")
 
@@ -53,6 +54,10 @@ class guiInterface(QWidget):
     def getPath(self):
         path = QFileDialog.getExistingDirectory()
         self.le.setText(path)
+        self.leObjectName.setText(path.split("/")[-1])
+
+    def getObjectName(self):
+        path = self.le.text()
         self.leObjectName.setText(path.split("/")[-1])
 
     def generatePreview(self):
