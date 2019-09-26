@@ -58,7 +58,7 @@ class guiInterface(QWidget):
 
     def getObjectName(self):
         path = self.le.text()
-        self.leObjectName.setText(path.split("/")[-1])
+        self.leObjectName.setText(path.split("\\")[-1])
 
     def generatePreview(self):
         folder = self.le.text()
