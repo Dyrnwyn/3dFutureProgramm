@@ -118,6 +118,12 @@ def generatePDF(dictOfClass, objectName):
                 cell = 0
 
 
+def removeOldPdf(pdfFlName, folder):
+    pdfFl = searchFl("pdf", folder)
+    if pdfFlName in pdfFl:
+        os.remove(folder + os.sep + pdfFlName)
+
+
 def pyMain(folder='/media/work_part/python/Ижевск 40 ш 1в досьемка/'):
     os.chdir(folder)
     createTmpDir()

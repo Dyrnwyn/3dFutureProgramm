@@ -63,6 +63,7 @@ class guiInterface(QWidget):
     def generatePreview(self):
         folder = self.le.text()
         os.chdir(folder)
+        previewer.removeOldPdf(self.le.text().split("/")[-1] + ".pdf", folder)
         previewer.createTmpDir()
         self.prgBar.setValue(5)
         psdFl = previewer.searchFl("psd", folder)
