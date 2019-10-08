@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QFileDialog,
                              QLineEdit, QGridLayout, QProgressBar, QMessageBox,
-                             QGroupBox)
+                             QGroupBox, QMenuBar)
 import previewer
 import os
 
@@ -15,8 +15,10 @@ class guiInterface(QWidget):
         self.setGeometry(0, 0, 400, 100)
         self.setWindowTitle("Превьювер")
         self.move(650, 490)
+
         self.grpboxPath = QGroupBox("Выберите объект", self)
         self.grpboxObjectName = QGroupBox("Имя объекта для вывода в pdf", self)
+
         self.btn = QPushButton('Старт', self)
         self.rbtn = QPushButton('Обзор', self)
         self.qbtn = QPushButton('Выход', self)
@@ -42,11 +44,12 @@ class guiInterface(QWidget):
 
         grid = QGridLayout()
         grid.setSpacing(10)
-        grid.addWidget(self.prgBar, 1, 0, 1, 2)
-        grid.addWidget(self.grpboxPath, 2, 0, 1, 2)
-        grid.addWidget(self.grpboxObjectName, 3, 0, 1, 2)
-        grid.addWidget(self.btn, 6, 0)
-        grid.addWidget(self.qbtn, 6, 1)
+        
+        grid.addWidget(self.prgBar, 2, 0, 1, 2)
+        grid.addWidget(self.grpboxPath, 3, 0, 1, 2)
+        grid.addWidget(self.grpboxObjectName, 4, 0, 1, 2)
+        grid.addWidget(self.btn, 7, 0)
+        grid.addWidget(self.qbtn, 7, 1)
         self.setLayout(grid)
 
         self.show()

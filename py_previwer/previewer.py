@@ -92,7 +92,7 @@ def createDictClass(flList):
                 clssList[i[5]].append(fl)
         except IndexError:
             for key, val in clssList.items():
-                if key == "Класс":
+                if key == "Не указан":
                     val.append(fl)
     return dictSort(clssList)
 
@@ -121,7 +121,7 @@ def generatePDF(dictOfClass, objectName):
 def removeOldPdf(pdfFlName, folder):
     pdfFl = searchFl("pdf", folder)
     if pdfFlName in pdfFl:
-        os.remove(folder + os.sep + pdfFlName)
+        os.remove(folder + os.sep + pdfFlName)     
 
 
 def pyMain(folder='/media/work_part/python/Ижевск 40 ш 1в досьемка/'):

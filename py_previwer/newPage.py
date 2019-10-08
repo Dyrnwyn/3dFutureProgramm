@@ -98,6 +98,10 @@ class drawPage(object):
             self.page.save(nameObject + ".pdf", append=True, resolution=300)
         except FileNotFoundError:
             self.page.save(nameObject + ".pdf", resolution=300)
+        except PermissionError as e:
+            fl_object = open(pypreviewer_err.txt, w)
+            fl_object.write(e)
+            fl_object.close()
 
 
 # if __name__ == "__main__":
