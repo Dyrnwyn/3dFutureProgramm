@@ -4,7 +4,7 @@ from psd_tools import PSDImage
 import re
 from PIL import Image
 from os import sep
-
+#11
 
 tmpDir = 'tmp'
 

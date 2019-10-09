@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QFileDialog,
                              QGroupBox, QMenuBar)
 import previewer
 import os
-
+#11
 class guiInterface(QWidget):
     """docstring for  guiInterface"""
     def __init__(self):

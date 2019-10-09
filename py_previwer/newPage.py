@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
-
+#11
 fontPath = "/media/work_part/python/previewer/py_previwer/Font/a_Futurica.ttf"
 
 
