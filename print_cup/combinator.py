@@ -86,12 +86,14 @@ def generatePngForPrint(dictOfClass, objectName):
     # objectName = os.getcwd().split(sep)[-1]
     cell=0
     count=0
+    fileName=""
     for key, val in dictOfClass.items():
         for v in val:
             cell += 1
             print(cell)
             if cell == 1:
                 className = v.split("_")[5]
+                fileName = className
                 img = Image.new('RGBA', (2480,3580), color=(255,255,255))
                 draw = ImageDraw.Draw(img)
                 draw.text((1240, 50), objectName, font=font, fill=0)
@@ -101,8 +103,9 @@ def generatePngForPrint(dictOfClass, objectName):
             elif cell == 2:
                 cupImg = Image.open(cup_dir + os.sep + v)
                 className = v.split("_")[5]
+                fileName += "_" + className
                 draw.text((1885, 50), className, font=font, fill=0)
                 img.paste(cupImg, (1290, 275))
-                img.save( str(count) + ".png", compress_level=0)
+                img.save( cup_dir + os.sep + fileName + ".png", compress_level=0)
                 cell = 0
                 count += 1
