@@ -5,14 +5,8 @@ import re
 import newPrintImage
 
 cup_dir = "Готовые кружки"
-fontPath = "/media/work_part/python/previewer/py_previwer/Font/a_Futurica.ttf"
+fontPath = "a_Futurica.ttf"
 font = ImageFont.truetype(fontPath, 70)
-def newPage():
-    img = Image.new('RGBA', (2480,3580), color=(255,255,255))
-    img = Image.new('RGBA', (2480,3580), color=(255,255,0))
-    psdImg = PSDImage.frompil(img, compression=0)
-    psdImg.save("test.psd",mode="wb")
-
 
 def createCupDir():
   # Создаем временную директорию
@@ -80,6 +74,10 @@ def createDictClass(flList):
                     val.append(fl)
     return dictSort(clssList)
 
+def delOldPng(oldPng):
+    for i in oldPng:
+        if "Кружка-термос с крышкой" in i:
+            os.remove(cup_dir + os.sep + i)
 
 
 def generatePngForPrint(dictOfClass, objectName):
@@ -87,25 +85,36 @@ def generatePngForPrint(dictOfClass, objectName):
     cell=0
     count=0
     fileName=""
+    oldFileName=""
     for key, val in dictOfClass.items():
         for v in val:
-            cell += 1
-            print(cell)
+            cell += 1              
             if cell == 1:
                 className = v.split("_")[5]
                 fileName = className
-                img = Image.new('RGBA', (2480,3580), color=(255,255,255))
+                img = Image.new('RGBA', (2480,3508), color=(255,255,255))
                 draw = ImageDraw.Draw(img)
-                draw.text((1240, 50), objectName, font=font, fill=0)
-                draw.text((595, 50), className, font=font, fill=0)
+                draw.text((1240, 50), objectName, font=font, fill=(0,0,0,255))
+                draw.text((595, 50), className, font=font, fill=(0,0,0,255))
                 cupImg = Image.open(cup_dir + os.sep + v)
-                img.paste(cupImg, (50, 275))
+                img.paste(cupImg, (75, 160))
+                img.save( cup_dir + os.sep + fileName + ".png", compress_level=0, dpi=(300,300))
+                img.close()
+                oldFileName = fileName
             elif cell == 2:
+                img = Image.open(cup_dir + os.sep + fileName + ".png")
+                draw = ImageDraw.Draw(img)
                 cupImg = Image.open(cup_dir + os.sep + v)
+
+                imgToDel = cup_dir + "/" + oldFileName + ".png"
+                os.remove(imgToDel)
                 className = v.split("_")[5]
-                fileName += "_" + className
-                draw.text((1885, 50), className, font=font, fill=0)
-                img.paste(cupImg, (1290, 275))
-                img.save( cup_dir + os.sep + fileName + ".png", compress_level=0)
+                fileName += "_" + className + "_" + str(count)
+
+                draw.text((1885, 50), className, font=font, fill=(0,0,0,255))
+                img.paste(cupImg, (1265, 160))
+                img.save( cup_dir + os.sep + fileName + ".png", compress_level=0, dpi=(300,300))
+                img.close()
+                
                 cell = 0
                 count += 1
