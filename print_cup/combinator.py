@@ -40,10 +40,17 @@ def convertPsd(psdFl, cupDir):
     # до размера 900 px
     baseSize = 900
     for psdFlName in psdFl:
+        number = int(psdFlName.split("_")[4])
         psd = PSDImage.open(psdFlName)
         pilImg = psd.compose()
         pilImgRotate = pilImg.transpose(Image.ROTATE_90)
-        pilImgRotate.save(cupDir + os.sep +  psdFlName[0:-4] + ".png", compress_level=0)
+        if number == 1:
+            pilImgRotate.save(cupDir + os.sep +  psdFlName[0:-4] + ".png", compress_level=0)
+        else:
+            i = 0
+            while i < number :
+                pilImgRotate.save(cupDir + os.sep +  psdFlName[0:-4] +"_копия " + str(i) + ".png", compress_level=0)
+                i = i + 1
 
 def dictSort(unsortedDict):
     tmpList = []
@@ -94,8 +101,8 @@ def generatePngForPrint(dictOfClass, objectName):
                 fileName = className
                 img = Image.new('RGBA', (2480,3508), color=(255,255,255))
                 draw = ImageDraw.Draw(img)
-                draw.text((1240, 50), objectName, font=font, fill=(0,0,0,255))
-                draw.text((595, 50), className, font=font, fill=(0,0,0,255))
+                draw.text((500, 50), objectName, font=font, fill=(0,0,0,255))
+                draw.text((100, 50), className, font=font, fill=(0,0,0,255))
                 cupImg = Image.open(cup_dir + os.sep + v)
                 img.paste(cupImg, (75, 160))
                 img.save( cup_dir + os.sep + fileName + ".png", compress_level=0, dpi=(300,300))
@@ -111,7 +118,7 @@ def generatePngForPrint(dictOfClass, objectName):
                 className = v.split("_")[5]
                 fileName += "_" + className + "_" + str(count)
 
-                draw.text((1885, 50), className, font=font, fill=(0,0,0,255))
+                draw.text((2200, 50), className, font=font, fill=(0,0,0,255))
                 img.paste(cupImg, (1265, 160))
                 img.save( cup_dir + os.sep + fileName + ".png", compress_level=0, dpi=(300,300))
                 img.close()
