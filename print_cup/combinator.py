@@ -98,6 +98,8 @@ def generatePngForPrint(dictOfClass, objectName):
             cell += 1              
             if cell == 1:
                 className = v.split("_")[5]
+                if className == '':
+                    className = "Не указан"
                 fileName = className
                 img = Image.new('RGBA', (2480,3508), color=(255,255,255))
                 draw = ImageDraw.Draw(img)
@@ -116,6 +118,8 @@ def generatePngForPrint(dictOfClass, objectName):
                 imgToDel = cup_dir + "/" + oldFileName + ".png"
                 os.remove(imgToDel)
                 className = v.split("_")[5]
+                if className == '':
+                    className = "Не указан"
                 fileName += "_" + className + "_" + str(count)
 
                 draw.text((2200, 50), className, font=font, fill=(0,0,0,255))
