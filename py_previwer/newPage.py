@@ -82,12 +82,124 @@ class drawPage(object):
                      )
         self.draw.text(dictXY[numbCell], parametrs, font=self.font, fill=0)
 
+    def drawLastName(self, lastName,numbCell):
+        self.changeFont(fontSize=40)
+        dictXY = {1: (80, 400),
+                  2: (1220, 400),
+                  3: (80, 1925),
+                  4: (1220, 1925)
+                  }
+        self.draw.text(dictXY[numbCell], lastName, font=self.font, fill=0)
+        self.changeFont(fontSize=45)
+
+    def drawIdInformation(self, numbCell, idClient):
+        self.changeFont(fontSize=25)
+        dictXY = {1: (525, 1400),
+                  2: (1725, 1398),
+                  3: (525, 2950),
+                  4: (1725, 2950)
+                  }
+        dictXYid = {1: (802, 1550),
+                    2: (2002, 1548),
+                    3: (802, 3100),
+                    4: (2002, 3100)
+                    }
+        dictXYidNmbr = {1: (73, 1710),
+                        2: (1223, 1710),
+                        3: (73, 3258),
+                        4: (1223, 3258)
+                        }
+        textInformation = ("Возможна безналичная оплата без комиссиии %" + "\n"
+            "- с карт Сбербанка, в том числе и кредитных!" + "\n"
+            "- через любой банкомат Сбербанка" + "\n"
+            "Для оплаты:" + "\n"
+            "1. В меню поиска организаций введите наш ИНН 2464105021" + "\n"
+            "2. Введите номер изделия     (лицевой счет)" + "\n"
+            "3. Проверьте правильность заказа" + "\n"
+            "4. Произведите оплату" + "\n"
+            "Изделия можно будет забрать через 5 дней после оплаты" + "\n"
+            "Подробная инструкция по оплате: \nhttp://ОбъемныйМир.рф/parents/oplata"
+            )
+        textID = "ID*"
+        idNmbr = "ID: " + idClient 
+        self.draw.text(dictXY[numbCell],  textInformation, font=self.font, fill=0)
+        self.draw.text(dictXYid[numbCell],  textID, font=self.font, fill=(255, 0, 0))
+        self.changeFont(fontSize=45)
+        self.draw.text(dictXYidNmbr[numbCell],  idNmbr, font=self.font, fill=(255, 0, 0))
+
+    def drawCost(self, numbCell, cost):
+        dictXYidNmbr = {1: (73, 1652),
+                        2: (1223, 1652),
+                        3: (73, 3198),
+                        4: (1223, 3203)
+                        }
+        costTxt = "Сумма: " + cost
+        self.draw.text(dictXYidNmbr[numbCell],  costTxt, font=self.font, fill=(255, 0, 0))
+        
+
+    def drawSites(self, numbCell):
+        
+        dictXY = {1: (530, 1800),
+                  2: (1725, 1800),
+                  3: (530, 3330),
+                  4: (1725, 3330)
+                }
+        sites = ("vk.com/omfoto_ru" + "\n"
+                "ОбъемныйМир.рф/parents"
+                )
+        self.draw.text(dictXY[numbCell],  sites, font=self.font, fill=(25,0,200))
+
+
+
+    def drawProductParametrsWithPrice(self, flName, numbCell=1):
+        self.changeFont(fontSize=45)
+
+        splitFlName = flName.split("_")
+        try:
+            if splitFlName[0] == "о":
+                species = "объемная"
+            elif splitFlName[0] == "п":
+                species = "плоская"
+            else:
+                species = " "
+            proportions = splitFlName[1]
+            template = splitFlName[2]
+            photo = splitFlName[3]
+            number = splitFlName[4]
+            cost = splitFlName[8]
+            idClient = splitFlName[7]
+            lastName = splitFlName[9]
+            if "Кружка" in proportions:
+               proportions = "Кружка-термос"
+            if ("Настенный кален" in proportions) and (idClient != "id"):
+               proportions = "Настенный к."
+        except IndexError:
+            species = proportions = template = photo = number = cost = idClient = lastName = " "
+        if lastName != "" and not lastName.isdigit():
+            self.drawLastName(lastName, numbCell)
+        dictXY = {1: (70, 1400),
+                  2: (1220, 1400),
+                  3: (70, 2950),
+                  4: (1220, 2950)
+                  }
+        parametrs = ("Вид: " + species + "\n" +
+                     "Размер: " + proportions + "\n" +
+                     "Шаблон: " + template + "\n" +
+                     "Фото: " + photo + "\n" +
+                     "Кол-во: " + number + "\n" 
+                     )
+        self.drawCost(numbCell,cost)
+        if idClient != "id":
+            self.drawIdInformation(numbCell, idClient)        
+        self.draw.text(dictXY[numbCell], parametrs, font=self.font, fill=0)
+        self.drawSites(numbCell)
+
     def addImg(self, cell, imgPath):
         # метод вывода фото изделия в ячейки 
-        dictXY = {1: (220, 425),
-                  2: (1370, 425),
-                  3: (220, 1950),
-                  4: (1370, 1950)
+        dictXY = {1: (220, 475),
+                  2: (1370, 475),
+                  3: (220, 1975),
+                  4: (1370, 1975)
                   }
         img = Image.open(imgPath)
         self.page.paste(img, dictXY[cell])

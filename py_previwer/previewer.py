@@ -110,7 +110,11 @@ def generatePDF(dictOfClass, objectName):
                 page = newPage.drawPage()
                 page.drawNameObject(objectName)
                 page.drawOfKlass(key)
-            page.drawProductParametrs(v, cell)
+            sizeV = len(v.split("_"))
+            if sizeV <= 7:
+                page.drawProductParametrs(v, cell)
+            elif sizeV > 7:
+                page.drawProductParametrsWithPrice(v, cell)
             page.addImg(cell, tmpDir + sep + v)
             if cell == 4 or count == len(val):
                 page.savePage(objectName)
