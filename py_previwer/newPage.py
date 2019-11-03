@@ -166,6 +166,8 @@ class drawPage(object):
             template = splitFlName[2]
             photo = splitFlName[3]
             number = splitFlName[4]
+            if "[" in number:
+                number = number[1:-1]
             cost = splitFlName[8]
             idClient = splitFlName[7]
             lastName = splitFlName[9]
