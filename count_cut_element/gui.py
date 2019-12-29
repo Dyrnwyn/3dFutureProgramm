@@ -21,7 +21,7 @@ class guiInterface(QWidget):
         self.move(650, 490)
 
         self.grpboxPath = QGroupBox("Выберите объект", self)
-        self.grpboxObjectName = QGroupBox("Имя объекта для вывода в pdf", self)
+        self.grpboxObjectName = QGroupBox("Cюда не смотрим, вообще, просто тыкаем на кнопки", self)
 
         self.btn = QPushButton('Начать', self)
         self.rbtn = QPushButton('Обзор', self)
