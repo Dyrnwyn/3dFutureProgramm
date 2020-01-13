@@ -27,7 +27,7 @@ def listHVPhoto(fl):
     return photoH, photoV
 
 def createListsOfPhotoFile(txtFl):
-    fl = open(txtFl[0], 'r', encoding = 'cp500')
+    fl = open(txtFl[0], 'r', )
     for line in fl:
         print(line)
 
