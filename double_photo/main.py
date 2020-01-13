@@ -22,15 +22,15 @@ class guiInterface(QWidget):
         self.grpboxPath = QGroupBox("Выберите объект", self)
         self.grpboxObjectName = QGroupBox("Имя объекта для вывода в pdf", self)
 
-        self.btn = QPushButton('Старт', self)
+        self.btn = QPushButton('Компоновка', self)
         self.rbtn = QPushButton('Обзор', self)
-        self.qbtn = QPushButton('Выход', self)
+        self.qbtn = QPushButton('Разрезать', self)
         self.le = QLineEdit(self)
         self.leObjectName = QLineEdit(self)
         self.prgBar = QProgressBar(self)
         self.prgBar.setMaximum(100)
         self.rbtn.clicked.connect(self.getPath)
-        self.qbtn.clicked.connect(self.close)
+        self.qbtn.clicked.connect(self.cropImg)
         self.btn.clicked.connect(self.generatePreview)
         self.le.textChanged.connect(self.getObjectName)
         self.msgBox = QMessageBox(self)
@@ -78,6 +78,19 @@ class guiInterface(QWidget):
         combinator.createFileForRemoveBGV(photoV)
         self.prgBar.setValue(100)
         self.msgBox.exec_()
+
+    def cropImg(self):
+        folder = self.le.text()
+        os.chdir(folder)
+        self.prgBar.setValue(5)
+        jpgFl = combinator.searchFl("jpg", folder)
+        self.prgBar.setValue(10)
+        photoH,photoV = combinator.listHVPhotoForCrop(jpgFl)
+        self.prgBar.setValue(20)
+        combinator.cropImage(photoH, photoV)
+        self.prgBar.setValue(100)
+        self.msgBox.exec_()
+
 
 
 if __name__ == '__main__':
