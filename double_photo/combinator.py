@@ -31,22 +31,53 @@ def createFileForRemoveBGH(photoH):
     basImg = Image.new('RGB', (4000, 6250), color = (255, 255, 255))
     countImg = 0
     baseFileName = "H_"
+    countLen = 0
     for i in photoH:
+        print() 
         countImg += 1
         img = Image.open(i)
         x, y = img.size
         width = baseSize
         height = int(width / x * y)
         imgR = img.resize((width, height), Image.BICUBIC)
-        
+        #countLen += 1
         if countImg == 1:
             baseFileName += i[:-4] + "_"
             basImg = Image.new('RGB', (4000, 6250), color = (255, 255, 255))     
             basImg.paste(imgR, (0, 0))
-            print(countImg)
+            if photoH.index(i) == (len(photoH) - 1):
+                basImg.save(baseFileName + ".jpeg")
         else:
             baseFileName += i[:-4]
             basImg.paste(imgR, (0,3250))
             basImg.save(baseFileName + ".jpeg")
             baseFileName = "H_"
+            countImg = 0
+
+def createFileForRemoveBGV(photoV):
+    baseSize = 4000
+    basImg = Image.new('RGB', (6250, 4000), color = (255, 255, 255))
+    countImg = 0
+    baseFileName = "V_"
+    countLen = 0
+    for i in photoV:
+        print() 
+        countImg += 1
+        img = Image.open(i)
+        x, y = img.size
+        height = baseSize
+        width = int(height / y * x)
+        imgR = img.resize((width, height), Image.BICUBIC)
+        #countLen += 1
+        if countImg == 1:
+            baseFileName += i[:-4] + "_"
+            basImg = Image.new('RGB', (6250, 4000), color = (255, 255, 255))     
+            basImg.paste(imgR, (0, 0))
+            if photoV.index(i) == (len(photoV) - 1):
+                basImg.save(baseFileName + ".jpeg")
+        else:
+            baseFileName += i[:-4]
+            basImg.paste(imgR, (3250,0))
+            basImg.save(baseFileName + ".jpeg")
+            baseFileName = "V_"
             countImg = 0

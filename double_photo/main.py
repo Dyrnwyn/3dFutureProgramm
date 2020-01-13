@@ -74,16 +74,10 @@ class guiInterface(QWidget):
         self.prgBar.setValue(10)
         photoH,photoV = combinator.listHVPhoto(jpgFl)
         combinator.createFileForRemoveBGH(photoH)
-        # self.prgBar.setValue(60)
-        # jpgFl = previewer.searchFl("jpeg", previewer.tmpDir)
-        # self.prgBar.setValue(70)
-        # dictOfClass = previewer.createDictClass(jpgFl)
-        # self.prgBar.setValue(80)
-        # previewer.generatePDF(dictOfClass, self.leObjectName.text())
-        # self.prgBar.setValue(95)
-        # previewer.removeTmpDir()
-        # self.prgBar.setValue(100)
-        # self.msgBox.exec_()
+        self.prgBar.setValue(50)
+        combinator.createFileForRemoveBGV(photoV)
+        self.prgBar.setValue(100)
+        self.msgBox.exec_()
 
 
 if __name__ == '__main__':
