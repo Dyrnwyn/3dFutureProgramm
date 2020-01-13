@@ -70,7 +70,7 @@ class guiInterface(QWidget):
         folder = self.le.text()
         os.chdir(folder)
         self.prgBar.setValue(5)
-        jpgFl = combinator.searchFl("jpg", folder)
+        txtFl = combinator.searchFl("txt", folder)
         self.prgBar.setValue(10)
         photoH,photoV = combinator.listHVPhoto(jpgFl)
         combinator.createFileForRemoveBGH(photoH)

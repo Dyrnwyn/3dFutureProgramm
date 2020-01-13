@@ -26,6 +26,9 @@ def listHVPhoto(fl):
         img.close()
     return photoH, photoV
 
+def createListsOfPhotoFile(txtFl):
+    fl = open(txtFl[0],'r')
+
 def listHVPhotoForCrop(fl):
     photoH = []
     photoV = []
