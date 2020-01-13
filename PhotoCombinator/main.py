@@ -72,12 +72,12 @@ class guiInterface(QWidget):
         self.prgBar.setValue(5)
         txtFl = combinator.searchFl("txt", folder)
         self.prgBar.setValue(10)
-        photoH,photoV = combinator.listHVPhoto(jpgFl)
-        combinator.createFileForRemoveBGH(photoH)
-        self.prgBar.setValue(50)
-        combinator.createFileForRemoveBGV(photoV)
-        self.prgBar.setValue(100)
-        self.msgBox.exec_()
+        combinator.createListsOfPhotoFile(txtFl)
+        # combinator.createFileForRemoveBGH(photoH)
+        # self.prgBar.setValue(50)
+        # combinator.createFileForRemoveBGV(photoV)
+        # self.prgBar.setValue(100)
+        # self.msgBox.exec_()
 
 
 if __name__ == '__main__':
