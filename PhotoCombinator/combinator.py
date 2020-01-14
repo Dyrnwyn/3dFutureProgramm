@@ -158,33 +158,37 @@ def pagesize15(pagesize15):
             baseFileName = "15x20_"
             countImg = 0
 
-def pagesize20(photoV):
-    baseSize = 4000
-    basImg = Image.new('RGB', (6250, 4000), color = (255, 255, 255))
+def pagesize20(size20):
+
+    countImg20 = 0
     countImg = 0
-    baseFileName = "V_"
-    countLen = 0
-    for i in photoV:
-        print() 
-        countImg += 1
-        img = Image.open(i)
+    baseFileName = '20x30_'
+    count = 0
+    baseSize = 2415
+
+    for i in size20:
+        baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
+        countImg20 += 1
+        img = Image.open(i + '.jpg')
         x, y = img.size
-        height = baseSize
-        width = int(height / y * x)
-        imgR = img.resize((width, height), Image.BICUBIC)
-        #countLen += 1
-        if countImg == 1:
-            baseFileName += i[:-4] + "_"
-            basImg = Image.new('RGB', (6250, 4000), color = (255, 255, 255))     
-            basImg.paste(imgR, (0, 0))
-            if photoV.index(i) == (len(photoV) - 1):
-                basImg.save(baseFileName + "NONE_.jpeg")
+
+        if x < y:
+            height = baseSize
+            width = int(height / y * x)
+            imgR = img.resize((width, height), Image.BICUBIC)
+        elif y < x:
+            width = baseSize
+            height = int(width / x * y)
+            imgR = img.resize((width, height), Image.BICUBIC)
+        if x > y:
+            imgRH = imgR.transpose(Image.ROTATE_90)
+            baseImg.paste(imgRH, (35, 50))
         else:
-            baseFileName += i[:-4] + "_"
-            basImg.paste(imgR, (3250,0))
-            basImg.save(baseFileName + ".jpeg")
-            baseFileName = "V_"
-            countImg = 0
+            baseImg.paste(imgR, (35, 50))
+
+        baseFileName += i + "_"
+        baseImg.save(baseFileName + ".jpeg")
+        baseFileName = '20x30_'
 
 def cropImage(photoH, photoV):
     for i in photoH:
