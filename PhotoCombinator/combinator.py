@@ -26,10 +26,28 @@ def listHVPhoto(fl):
         img.close()
     return photoH, photoV
 
+
+def getphotoname(line):
+    return line.split(';')[5]
+
 def createListsOfPhotoFile(txtFl):
-    fl = open(txtFl[0], 'r', )
+    fl = open(txtFl[0], 'r', encoding='cp1251')
+    size10 = []
+    size15 = []
+    size20 = []
     for line in fl:
-        print(line)
+        if '10х15' in line:
+            photoName = getphotoname(line)
+            size10.append(photoName)
+        elif '15х20' in line:
+            photoName = getphotoname(line)
+            size15.append(photoName)
+        elif '20х30' in line:
+            photoName = getphotoname(line)
+            size20.append(photoName)
+    fl.close()
+    return size10, size15, size20
+
 
 def listHVPhotoForCrop(fl):
     photoH = []
@@ -40,6 +58,68 @@ def listHVPhotoForCrop(fl):
         elif "V" in i:
             photoV.append(i)
     return photoH, photoV
+
+def pagesize10(size10):
+    baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
+    countImg10 = 0
+    baseFileName = '10x15_'
+    count = 0
+    baseSize = 1181
+    for i in size10:
+        count += 1
+        img = Image.open(i+'.jpg')
+        x, y = img.size
+        baseFileName += i + '_'
+
+        if x > y:
+            height = baseSize
+            width = int(height / y * x)
+            imgR = img.resize((width, height), Image.BICUBIC)
+        elif y > x:
+            width = baseSize
+            height = int(width / x * y)
+            imgR = img.resize((width, height), Image.BICUBIC)
+
+        if count == 1:
+            if x < y:
+                imgRH =  imgR.transpose(Image.ROTATE_90)
+                baseImg.paste(imgRH, (300, 150))
+            else:
+                baseImg.paste(imgR, (300, 150))
+            if size10.index(i) == (len(size10) - 1):
+                baseImg.save(baseFileName + 'NONE_NONE_' +
+                '.jpeg')
+                baseFileName = '10x15_'
+                count = 0
+
+        elif count == 2:
+            if x > y:
+                imgRV = imgR.transpose(Image.ROTATE_90)
+                baseImg.paste(imgRV, (50, 1560))
+            else:
+                baseImg.paste(imgR, (50, 1560))
+            if size10.index(i) == (len(size10) - 1):
+                baseImg.save(baseFileName + 'NONE_' +
+                '.jpeg')
+                baseFileName = '10x15_'
+                count = 0
+
+        elif count == 3:
+            if x > y:
+                imgRV = imgR.transpose(Image.ROTATE_90)
+                baseImg.paste(imgRV, (1250, 1560))
+            else:
+                baseImg.paste(imgR, (1250, 1560))
+            baseImg.save(baseFileName + '.jpeg')
+            baseFileName = '10x15_'
+            count = 0
+
+
+
+
+
+
+
 
 def createFileForRemoveBGH(photoH):
     baseSize = 4000
