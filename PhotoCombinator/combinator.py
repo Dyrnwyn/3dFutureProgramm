@@ -172,11 +172,11 @@ def pagesize20(size20):
         img = Image.open(i + '.jpg')
         x, y = img.size
 
-        if x < y:
+        if x > y:
             height = baseSize
             width = int(height / y * x)
             imgR = img.resize((width, height), Image.BICUBIC)
-        elif y < x:
+        elif y > x:
             width = baseSize
             height = int(width / x * y)
             imgR = img.resize((width, height), Image.BICUBIC)
