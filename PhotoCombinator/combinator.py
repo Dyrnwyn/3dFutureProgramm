@@ -66,6 +66,7 @@ def pagesize10(size10):
     count = 0
     baseSize = 1181
     for i in size10:
+        countImg10 *= 1
         count += 1
         img = Image.open(i+'.jpg')
         x, y = img.size
@@ -114,42 +115,50 @@ def pagesize10(size10):
             baseFileName = '10x15_'
             count = 0
 
-
-
-
-
-
-
-
-def createFileForRemoveBGH(photoH):
-    baseSize = 4000
-    basImg = Image.new('RGB', (4000, 6250), color = (255, 255, 255))
+def pagesize15(pagesize15):
+    baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
+    countImg15 = 0
     countImg = 0
-    baseFileName = "H_"
-    countLen = 0
-    for i in photoH:
-        print() 
+    baseFileName = '15x20_'
+    count = 0
+    baseSize = 1700
+    for i in pagesize15:
+        countImg15 += 1
         countImg += 1
-        img = Image.open(i)
+        img = Image.open(i + '.jpg')
         x, y = img.size
-        width = baseSize
-        height = int(width / x * y)
-        imgR = img.resize((width, height), Image.BICUBIC)
-        #countLen += 1
+
+        if x > y:
+            height = baseSize
+            width = int(height / y * x)
+            imgR = img.resize((width, height), Image.BICUBIC)
+        elif y > x:
+            width = baseSize
+            height = int(width / x * y)
+            imgR = img.resize((width, height), Image.BICUBIC)
+
         if countImg == 1:
-            baseFileName += i[:-4] + "_"
-            basImg = Image.new('RGB', (4000, 6250), color = (255, 255, 255))     
-            basImg.paste(imgR, (0, 0))
-            if photoH.index(i) == (len(photoH) - 1):
+            baseFileName += i + "_"
+            basImg = Image.new('RGB', (2480, 3508), color = (255, 255, 255))
+            if x < y:
+                imgRH = imgR.transpose(Image.ROTATE_90)
+                basImg.paste(imgRH, (59, 40))
+            else:
+                basImg.paste(imgR, (59, 40))
+            if pagesize15.index(i) == (len(pagesize15) - 1):
                 basImg.save(baseFileName + "NONE_.jpeg")
         else:
-            baseFileName += i[:-4] + "_"
-            basImg.paste(imgR, (0,3250))
+            baseFileName += i + "_"
+            if x < y:
+                imgRH = imgR.transpose(Image.ROTATE_90)
+                basImg.paste(imgRH, (59, 1758))
+            else:
+                basImg.paste(imgR, (59, 1758))
             basImg.save(baseFileName + ".jpeg")
-            baseFileName = "H_"
+            baseFileName = "15x20_"
             countImg = 0
 
-def createFileForRemoveBGV(photoV):
+def pagesize20(photoV):
     baseSize = 4000
     basImg = Image.new('RGB', (6250, 4000), color = (255, 255, 255))
     countImg = 0

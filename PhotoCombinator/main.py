@@ -74,10 +74,12 @@ class guiInterface(QWidget):
         self.prgBar.setValue(10)
         size10, size15, size20 = combinator.createListsOfPhotoFile(txtFl)
         self.prgBar.setValue(25)
-        combinator.pagesize10(size10)
-        # combinator.createFileForRemoveBGV(photoV)
-        # self.prgBar.setValue(100)
-        # self.msgBox.exec_()
+        #combinator.pagesize10(size10)
+        self.prgBar.setValue(50)
+        combinator.pagesize15(size15)
+        self.prgBar.setValue(75)
+       # combinator.pagesize20(size20)
+        self.msgBox.exec_()
 
 
 if __name__ == '__main__':
