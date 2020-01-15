@@ -56,11 +56,11 @@ def createFileForRemoveBGH(photoH):
             basImg = Image.new('RGB', (4000, 6250), color = (255, 255, 255))     
             basImg.paste(imgR, (0, 0))
             if photoH.index(i) == (len(photoH) - 1):
-                basImg.save(baseFileName + "NONE_.jpeg")
+                basImg.save(baseFileName + "NONE_.jpeg", dpi=(300,300))
         else:
             baseFileName += i[:-4] + "_"
             basImg.paste(imgR, (0,3250))
-            basImg.save(baseFileName + ".jpeg")
+            basImg.save(baseFileName + ".jpeg", dpi=(300,300))
             baseFileName = "H_"
             countImg = 0
 
@@ -84,11 +84,11 @@ def createFileForRemoveBGV(photoV):
             basImg = Image.new('RGB', (6250, 4000), color = (255, 255, 255))     
             basImg.paste(imgR, (0, 0))
             if photoV.index(i) == (len(photoV) - 1):
-                basImg.save(baseFileName + "NONE_.jpeg")
+                basImg.save(baseFileName + "NONE_.jpeg", dpi=(300,300))
         else:
             baseFileName += i[:-4] + "_"
             basImg.paste(imgR, (3250,0))
-            basImg.save(baseFileName + ".jpeg")
+            basImg.save(baseFileName + ".jpeg", dpi=(300,300))
             baseFileName = "V_"
             countImg = 0
 

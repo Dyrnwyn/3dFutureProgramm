@@ -28,7 +28,7 @@ def listHVPhoto(fl):
 
 
 def getphotoname(line):
-    return line.split(';')[5]
+    return line.split(';')[5] + '_' + line.split(';')[9]
 
 def createListsOfPhotoFile(txtFl):
     fl = open(txtFl[0], 'r', encoding='cp1251')
@@ -62,15 +62,16 @@ def listHVPhotoForCrop(fl):
 def pagesize10(size10):
     baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
     countImg10 = 0
+    countImg = 0
     baseFileName = '10x15_'
     count = 0
     baseSize = 1181
     for i in size10:
-        countImg10 *= 1
-        count += 1
-        img = Image.open(i+'.jpg')
+        countImg10 += 1
+        count = 0
+        img = Image.open(i.split('_')[0]+'.jpg')
         x, y = img.size
-        baseFileName += i + '_'
+        
 
         if x > y:
             height = baseSize
@@ -81,54 +82,60 @@ def pagesize10(size10):
             height = int(width / x * y)
             imgR = img.resize((width, height), Image.BICUBIC)
 
-        if count == 1:
-            if x < y:
-                imgRH =  imgR.transpose(Image.ROTATE_90)
-                baseImg.paste(imgRH, (300, 150))
-            else:
-                baseImg.paste(imgR, (300, 150))
-            if size10.index(i) == (len(size10) - 1):
-                baseImg.save(baseFileName + 'NONE_NONE_' +
-                '.jpeg', dpi=(300,300))
+        while count < int(i.split('_')[1]):
+            count += 1
+            countImg += 1
+            if countImg == 1:
+                baseFileName += i.split('_')[0] + '_'
+                if x < y:
+                    imgRH =  imgR.transpose(Image.ROTATE_90)
+                    baseImg.paste(imgRH, (300, 150))
+                else:
+                    baseImg.paste(imgR, (300, 150))
+                if size10.index(i) == (len(size10) - 1):
+                    baseImg.save(baseFileName + 'NONE_NONE_' +
+                    '.jpeg', dpi=(300,300))
+                    baseFileName = '10x15_'
+            elif countImg == 2:
+                baseFileName += i.split('_')[0] + '_'
+                if x > y:
+                    imgRV = imgR.transpose(Image.ROTATE_90)
+                    baseImg.paste(imgRV, (50, 1560))
+                else:
+                    baseImg.paste(imgR, (50, 1560))
+                if size10.index(i) == (len(size10) - 1):
+                    baseImg.save(baseFileName + 'NONE_' +
+                    '.jpeg')
+                    baseFileName = '10x15_'
+            elif countImg == 3:
+                baseFileName += i.split('_')[0] + '_'
+                if x > y:
+                    imgRV = imgR.transpose(Image.ROTATE_90)
+                    baseImg.paste(imgRV, (1250, 1560))
+                else:
+                    baseImg.paste(imgR, (1250, 1560))
+                baseImg.save(baseFileName +'r'+ str(count) + '.jpeg', dpi=(300,300))
                 baseFileName = '10x15_'
-                count = 0
+                countImg = 0
+                baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
 
-        elif count == 2:
-            if x > y:
-                imgRV = imgR.transpose(Image.ROTATE_90)
-                baseImg.paste(imgRV, (50, 1560))
-            else:
-                baseImg.paste(imgR, (50, 1560))
-            if size10.index(i) == (len(size10) - 1):
-                baseImg.save(baseFileName + 'NONE_' +
-                '.jpeg')
-                baseFileName = '10x15_'
-                count = 0
 
-        elif count == 3:
-            if x > y:
-                imgRV = imgR.transpose(Image.ROTATE_90)
-                baseImg.paste(imgRV, (1250, 1560))
-            else:
-                baseImg.paste(imgR, (1250, 1560))
-            baseImg.save(baseFileName + '.jpeg', dpi=(300,300))
-            baseFileName = '10x15_'
-            count = 0
-            baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
+
+
 
 def pagesize15(pagesize15):
     baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
     countImg15 = 0
     countImg = 0
     baseFileName = '15x20_'
-    count = 0
+    count = 1
     baseSize = 1700
     for i in pagesize15:
-        countImg15 += 1
-        countImg += 1
-        img = Image.open(i + '.jpg')
-        x, y = img.size
+        count = 0
+        countImg15 += 1     
+        img = Image.open(i.split('_')[0] + '.jpg')
 
+        x, y = img.size
         if x > y:
             height = baseSize
             width = int(height / y * x)
@@ -138,27 +145,37 @@ def pagesize15(pagesize15):
             height = int(width / x * y)
             imgR = img.resize((width, height), Image.BICUBIC)
 
-        if countImg == 1:
-            baseFileName += i + "_"
-            basImg = Image.new('RGB', (2480, 3508), color = (255, 255, 255))
-            if x < y:
-                imgRH = imgR.transpose(Image.ROTATE_90)
-                basImg.paste(imgRH, (34, 40))
+
+        while count < int(i.split('_')[1]):
+            count += 1
+            print(count)
+            countImg += 1
+            print(countImg)
+            if countImg == 1:
+                baseFileName += i.split('_')[0] + "_"
+                basImg = Image.new('RGB', (2480, 3508), color = (255, 255, 255))
+                if x < y:
+                    imgRH = imgR.transpose(Image.ROTATE_90)
+                    basImg.paste(imgRH, (34, 40))
+                else:
+                    basImg.paste(imgR, (34, 40))
+                if pagesize15.index(i) == (len(pagesize15) - 1):
+                    basImg.save(baseFileName + "NONE_.jpeg", dpi=(300,300))
             else:
-                basImg.paste(imgR, (34, 40))
-            if pagesize15.index(i) == (len(pagesize15) - 1):
-                basImg.save(baseFileName + "NONE_.jpeg", dpi=(300,300))
-        else:
-            baseFileName += i + "_"
-            if x < y:
-                imgRH = imgR.transpose(Image.ROTATE_90)
-                basImg.paste(imgRH, (34, 1758))
-            else:
-                basImg.paste(imgR, (34, 1758))
-            basImg.save(baseFileName + ".jpeg", dpi=(300,300))
-            baseFileName = "15x20_"
-            countImg = 0
-            baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
+                baseFileName += i.split('_')[0] + "_"
+                if x < y:
+                    imgRH = imgR.transpose(Image.ROTATE_90)
+                    basImg.paste(imgRH, (34, 1758))
+                else:
+                    basImg.paste(imgR, (34, 1758))
+                basImg.save(baseFileName +'r'+ str(count) + ".jpeg", dpi=(300,300))            
+                baseFileName = "15x20_"
+                countImg = 0
+                baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
+
+
+
+
 
 def pagesize20(size20):
 
@@ -171,7 +188,7 @@ def pagesize20(size20):
     for i in size20:
         baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
         countImg20 += 1
-        img = Image.open(i + '.jpg')
+        img = Image.open(i.split('_')[0] + '.jpg')
         x, y = img.size
 
         if x > y:
@@ -188,8 +205,10 @@ def pagesize20(size20):
         else:
             baseImg.paste(imgR, (35, 50))
 
-        baseFileName += i + "_"
+        baseFileName += i 
         baseImg.save(baseFileName + ".jpeg", dpi=(300,300))
+
+
         baseFileName = '20x30_'
         baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
 

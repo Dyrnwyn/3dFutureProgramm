@@ -85,9 +85,6 @@ class guiInterface(QWidget):
             self.prgBar.setValue(10)
             size10, size15, size20 = combinator.createListsOfPhotoFile(txtFl)
             self.prgBar.setValue(25)
-            print(self.opt10.checkState())
-            print(self.opt15.checkState())
-            print(self.opt20.checkState())
             if self.opt10.checkState():
                 combinator.pagesize10(size10)
             self.prgBar.setValue(50)
