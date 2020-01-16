@@ -70,13 +70,13 @@ class guiInterface(QWidget):
     def getPath(self):
         path = QFileDialog.getExistingDirectory()
         self.le.setText(path)
-    #    self.leObjectName.setText(path.split("/")[-1])
 
     def getObjectName(self):
         path = self.le.text()
         self.leObjectName.setText(path.split("\\")[-1])
 
     def generatePreview(self):
+        """Функция комбинирования фотографий"""
         folder = self.le.text()
         try:
             os.chdir(folder)
@@ -105,6 +105,7 @@ class guiInterface(QWidget):
 
 
     def sortphoto(self):
+        """Функция сортировки фотографий"""
         folder = self.le.text()
         try:
             os.chdir(folder)

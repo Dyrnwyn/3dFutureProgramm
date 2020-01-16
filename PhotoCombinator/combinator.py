@@ -19,10 +19,11 @@ def getphotoname(line):
     return line.split(';')[5] + '_' + line.split(';')[9]
 
 def createListsOfPhotoFile(txtFl):
+    """Создаем списки фотографий 10х15, 15х20, 20х30"""
     fl = open(txtFl[0], 'r', encoding='cp1251')
-    size10 = []
-    size15 = []
-    size20 = []
+    size10 = []  # Список 10х15
+    size15 = []  # Список 15х20
+    size20 = []  # Список 20х30
     for line in fl:
         if '10х15' in line:
             photoName = getphotoname(line)
@@ -38,28 +39,34 @@ def createListsOfPhotoFile(txtFl):
 
 
 def sortphoto10(size10, dir10):
+    """Функция копирования фотографий 10х15 в отдельную папку"""
     os.mkdir(dir10)
     for i in size10:
         os.system('copy ' + i.split('_')[0] + '.jpg ' + '"' + dir10 + '"')
 
 
 def sortphoto15(size15, dir15):
+    """Функция копирования фотографий 15х20 в отдельную папку"""
     os.mkdir(dir15)
     for i in size15:
         os.system('copy ' + i.split('_')[0] + '.jpg ' + '"' + dir15 + '"')
 
+
 def sortphoto20(size20, dir20):
+    """Функция копирования фотографий 20х30 в отдельную папку"""
     os.mkdir(dir20)
     for i in size20:
         os.system('copy ' + i.split('_')[0] + '.jpg ' + '"' + dir20 + '"')
 
+
 def pagesize10(size10, dir10):
+    """Функция расстановки фотографий 10х15 на листе А4"""
     baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
-    countImg10 = 0
-    countImg = 0
-    baseFileName = '10x15_'
+    countImg10 = 0  # Считаем общее количество фотографий
+    countImg = 0  # Считаем количество фотографий на листе
+    baseFileName = '10x15_'  # Начало имени файла
     count = 0
-    baseSize = 1181
+    baseSize = 1181  # Основной размер меньшей стороны
     for i in size10:
         count = 0
         img = Image.open(dir10 + os.sep + i.split('_')[0]+'.jpg')
@@ -120,12 +127,13 @@ def pagesize10(size10, dir10):
 
 
 def pagesize15(pagesize15, dir15):
+    """Функция расстановки фотографий 15х20 на листе А4"""
     baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
-    countImg15 = 0
-    countImg = 0
-    baseFileName = '15x20_'
+    countImg15 = 0  # Считаем общее количество фотографий
+    countImg = 0  # Считаем количество фотографий на листе
+    baseFileName = '15x20_'  # Начало имени файла
     count = 1
-    baseSize = 1700
+    baseSize = 1700  # Основной размер меньшей стороны
     for i in pagesize15:
         count = 0
              
@@ -171,15 +179,11 @@ def pagesize15(pagesize15, dir15):
     flr.close()
 
 
-
-
 def pagesize20(size20, dir20):
-
-    countImg20 = 0
-    countImg = 0
-    baseFileName = '20x30_'
-    count = 0
-    baseSize = 2415
+    """Функция расстановки фотографий 20х30 на листе А4"""
+    countImg20 = 0  # Считаем общее количество фотографий
+    baseFileName = '20x30_'  # Начало имени файла
+    baseSize = 2415  # Основной размер меньшей стороны
 
     for i in size20:
         baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
@@ -201,7 +205,7 @@ def pagesize20(size20, dir20):
         else:
             baseImg.paste(imgR, (35, 50))
 
-        baseFileName += i 
+        baseFileName + = i 
         baseImg.save(dir20 + os.sep + baseFileName + ".jpeg", dpi=(300,300))
 
 
