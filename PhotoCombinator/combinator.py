@@ -2,6 +2,7 @@ import re
 import os
 from PIL import Image
 
+
 def searchFl(flExt, fldr=""):
     # Во временно директории ищем все jpeg файлы
     # И добавляем их в список
@@ -12,19 +13,6 @@ def searchFl(flExt, fldr=""):
                     re.findall(r"^.*\." + flExt + "*", fl.name):
                 filteredFlList.append(fl.name)
     return filteredFlList
-
-
-def listHVPhoto(fl):
-    photoH = []
-    photoV = []
-    for i in fl:
-        img = Image.open(i)
-        if img.size[0] < img.size[1]:
-            photoV.append(i)
-        else:
-            photoH.append(i)
-        img.close()
-    return photoH, photoV
 
 
 def getphotoname(line):
@@ -49,15 +37,21 @@ def createListsOfPhotoFile(txtFl):
     return size10, size15, size20
 
 
-def listHVPhotoForCrop(fl):
-    photoH = []
-    photoV = []
-    for i in fl:
-        if "H" in i:
-            photoH.append(i)
-        elif "V" in i:
-            photoV.append(i)
-    return photoH, photoV
+def sortphoto10(size10, dir10):
+    os.mkdir(dir10)
+    for i in size10:
+        os.system('copy ' + i.split('_')[0] + '.jpg ' + '"' + dir10 + '"')
+
+
+def sortphoto15(size15, dir15):
+    os.mkdir(dir15)
+    for i in size15:
+        os.system('copy ' + i.split('_')[0] + '.jpg ' + '"' + dir15 + '"')
+
+def sortphoto20(size20, dir20):
+    os.mkdir(dir20)
+    for i in size20:
+        os.system('copy ' + i.split('_')[0] + '.jpg ' + '"' + dir20 + '"')
 
 def pagesize10(size10):
     baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
@@ -148,9 +142,7 @@ def pagesize15(pagesize15):
 
         while count < int(i.split('_')[1]):
             count += 1
-            print(count)
             countImg += 1
-            print(countImg)
             if countImg == 1:
                 baseFileName += i.split('_')[0] + "_"
                 basImg = Image.new('RGB', (2480, 3508), color = (255, 255, 255))
@@ -211,24 +203,3 @@ def pagesize20(size20):
 
         baseFileName = '20x30_'
         baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
-
-def cropImage(photoH, photoV):
-    for i in photoH:
-        img = Image.open(i)
-        imgTopName = i.split("_")[1]
-        imgTop = img.crop((0,0,4000,2700))
-        imgTop.save(imgTopName + ".png")
-        imgBottomName = i.split("_")[2]
-        if "NONE" not in imgBottomName:
-            imgBottom = img.crop((0,3250,4000,6000))
-            imgBottom.save(imgBottomName + ".png")
-
-    for i in photoV:
-        img = Image.open(i)
-        imgTopName = i.split("_")[1]
-        imgTop = img.crop((0,0,2700,4000))
-        imgTop.save(imgTopName + ".png")
-        imgBottomName = i.split("_")[2]
-        if "NONE" not in imgBottomName:
-            imgBottom = img.crop((3250,0,6000,4000))
-            imgBottom.save(imgBottomName + ".png")

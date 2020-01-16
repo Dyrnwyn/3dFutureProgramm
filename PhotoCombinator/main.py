@@ -105,7 +105,25 @@ class guiInterface(QWidget):
 
 
     def sortphoto(self):
-        pass
+        folder = self.le.text()
+        try:
+            os.chdir(folder)
+            self.prgBar.setValue(5)
+            txtFl = combinator.searchFl("txt", folder)
+            self.prgBar.setValue(10)
+            size10, size15, size20 = combinator.createListsOfPhotoFile(txtFl)
+            self.prgBar.setValue(25)
+            combinator.sortphoto10(size10, '10x15')
+            self.prgBar.setValue(50)
+            combinator.sortphoto15(size15, '15x20')
+            self.prgBar.setValue(75)
+            combinator.sortphoto20(size20, '20x30')
+            self.prgBar.setValue(100)
+            self.msgBox.exec_()
+
+
+        except:
+            pass
 
 
 if __name__ == '__main__':
