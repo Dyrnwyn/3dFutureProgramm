@@ -53,7 +53,7 @@ def sortphoto20(size20, dir20):
     for i in size20:
         os.system('copy ' + i.split('_')[0] + '.jpg ' + '"' + dir20 + '"')
 
-def pagesize10(size10):
+def pagesize10(size10, dir10):
     baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
     countImg10 = 0
     countImg = 0
@@ -61,9 +61,8 @@ def pagesize10(size10):
     count = 0
     baseSize = 1181
     for i in size10:
-        countImg10 += 1
         count = 0
-        img = Image.open(i.split('_')[0]+'.jpg')
+        img = Image.open(dir10 + os.sep + i.split('_')[0]+'.jpg')
         x, y = img.size
         
 
@@ -77,6 +76,7 @@ def pagesize10(size10):
             imgR = img.resize((width, height), Image.BICUBIC)
 
         while count < int(i.split('_')[1]):
+            countImg10 += 1
             count += 1
             countImg += 1
             if countImg == 1:
@@ -87,7 +87,7 @@ def pagesize10(size10):
                 else:
                     baseImg.paste(imgR, (300, 150))
                 if size10.index(i) == (len(size10) - 1):
-                    baseImg.save(baseFileName + 'NONE_NONE_' +
+                    baseImg.save(dir10 + os.sep + baseFileName + 'NONE_NONE_' +
                     '.jpeg', dpi=(300,300))
                     baseFileName = '10x15_'
             elif countImg == 2:
@@ -98,7 +98,7 @@ def pagesize10(size10):
                 else:
                     baseImg.paste(imgR, (50, 1560))
                 if size10.index(i) == (len(size10) - 1):
-                    baseImg.save(baseFileName + 'NONE_' +
+                    baseImg.save(dir10 + os.sep + baseFileName + 'NONE_' +
                     '.jpeg')
                     baseFileName = '10x15_'
             elif countImg == 3:
@@ -108,16 +108,18 @@ def pagesize10(size10):
                     baseImg.paste(imgRV, (1250, 1560))
                 else:
                     baseImg.paste(imgR, (1250, 1560))
-                baseImg.save(baseFileName +'r'+ str(count) + '.jpeg', dpi=(300,300))
+                baseImg.save(dir10 + os.sep + baseFileName +'r'+ str(count) + '.jpeg', dpi=(300,300))
                 baseFileName = '10x15_'
                 countImg = 0
                 baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
+    flr = open("Кол-во 10x15  " + str(countImg10), 'w')
+    flr.close()
 
 
 
 
 
-def pagesize15(pagesize15):
+def pagesize15(pagesize15, dir15):
     baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
     countImg15 = 0
     countImg = 0
@@ -126,8 +128,8 @@ def pagesize15(pagesize15):
     baseSize = 1700
     for i in pagesize15:
         count = 0
-        countImg15 += 1     
-        img = Image.open(i.split('_')[0] + '.jpg')
+             
+        img = Image.open(dir15 + os.sep + i.split('_')[0] + '.jpg')
 
         x, y = img.size
         if x > y:
@@ -141,6 +143,7 @@ def pagesize15(pagesize15):
 
 
         while count < int(i.split('_')[1]):
+            countImg15 += 1
             count += 1
             countImg += 1
             if countImg == 1:
@@ -152,7 +155,7 @@ def pagesize15(pagesize15):
                 else:
                     basImg.paste(imgR, (34, 40))
                 if pagesize15.index(i) == (len(pagesize15) - 1):
-                    basImg.save(baseFileName + "NONE_.jpeg", dpi=(300,300))
+                    basImg.save(dir15 + os.sep + baseFileName + "NONE_.jpeg", dpi=(300,300))
             else:
                 baseFileName += i.split('_')[0] + "_"
                 if x < y:
@@ -160,16 +163,17 @@ def pagesize15(pagesize15):
                     basImg.paste(imgRH, (34, 1758))
                 else:
                     basImg.paste(imgR, (34, 1758))
-                basImg.save(baseFileName +'r'+ str(count) + ".jpeg", dpi=(300,300))            
+                basImg.save(dir15 + os.sep + baseFileName +'r'+ str(count) + ".jpeg", dpi=(300,300))            
                 baseFileName = "15x20_"
                 countImg = 0
                 baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
+    flr = open("Кол-во 15x20  " + str(countImg15), 'w')
+    flr.close()
 
 
 
 
-
-def pagesize20(size20):
+def pagesize20(size20, dir20):
 
     countImg20 = 0
     countImg = 0
@@ -179,8 +183,8 @@ def pagesize20(size20):
 
     for i in size20:
         baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
-        countImg20 += 1
-        img = Image.open(i.split('_')[0] + '.jpg')
+        countImg20 += int(i.split('_')[1])
+        img = Image.open(dir20 + os.sep + i.split('_')[0] + '.jpg')
         x, y = img.size
 
         if x > y:
@@ -198,8 +202,10 @@ def pagesize20(size20):
             baseImg.paste(imgR, (35, 50))
 
         baseFileName += i 
-        baseImg.save(baseFileName + ".jpeg", dpi=(300,300))
+        baseImg.save(dir20 + os.sep + baseFileName + ".jpeg", dpi=(300,300))
 
 
         baseFileName = '20x30_'
         baseImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
+    flr = open("Кол-во 20x30  " + str(countImg20), 'w')
+    flr.close()

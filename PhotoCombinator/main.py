@@ -86,13 +86,13 @@ class guiInterface(QWidget):
             size10, size15, size20 = combinator.createListsOfPhotoFile(txtFl)
             self.prgBar.setValue(25)
             if self.opt10.checkState():
-                combinator.pagesize10(size10)
+                combinator.pagesize10(size10, '10x15')
             self.prgBar.setValue(50)
             if self.opt15.checkState():
-                combinator.pagesize15(size15)
+                combinator.pagesize15(size15, '15x20')
             self.prgBar.setValue(75)
             if self.opt20.checkState():
-                combinator.pagesize20(size20)
+                combinator.pagesize20(size20, '20x30')
             self.prgBar.setValue(100)
             self.msgBox.exec_()
         except OSError:
@@ -120,10 +120,10 @@ class guiInterface(QWidget):
             combinator.sortphoto20(size20, '20x30')
             self.prgBar.setValue(100)
             self.msgBox.exec_()
-
-
-        except:
-            pass
+        except FileExistsError:
+            self.allertBox.setText("Удали папки")
+            self.allertBox.exec_()
+            self.prgBar.setValue(0)
 
 
 if __name__ == '__main__':
