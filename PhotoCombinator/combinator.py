@@ -135,8 +135,7 @@ def pagesize15(pagesize15, dir15):
     count = 1
     baseSize = 1700  # Основной размер меньшей стороны
     for i in pagesize15:
-        count = 0
-             
+        count = 0             
         img = Image.open(dir15 + os.sep + i.split('_')[0] + '.jpg')
 
         x, y = img.size
@@ -149,21 +148,21 @@ def pagesize15(pagesize15, dir15):
             height = int(width / x * y)
             imgR = img.resize((width, height), Image.BICUBIC)
 
-
         while count < int(i.split('_')[1]):
             countImg15 += 1
             count += 1
             countImg += 1
             if countImg == 1:
                 baseFileName += i.split('_')[0] + "_"
-                basImg = Image.new('RGB', (2480, 3508), color = (255, 255, 255))
+                basImg = Image.new('RGB', (2480, 3508), color=(255, 255, 255))
                 if x < y:
                     imgRH = imgR.transpose(Image.ROTATE_90)
                     basImg.paste(imgRH, (34, 40))
                 else:
                     basImg.paste(imgR, (34, 40))
                 if pagesize15.index(i) == (len(pagesize15) - 1):
-                    basImg.save(dir15 + os.sep + baseFileName + "NONE_.jpeg", dpi=(300,300))
+                    basImg.save(dir15 + os.sep + baseFileName + "NONE_.jpeg",
+                                dpi=(300, 300))
             else:
                 baseFileName += i.split('_')[0] + "_"
                 if x < y:
