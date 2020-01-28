@@ -88,6 +88,7 @@ def pagesize10(size10, dir10):
             countImg10 += 1
             count += 1
             countImg += 1
+
             if countImg == 1:
                 baseFileName += i.split('_')[0] + '_'
                 if x < y:
@@ -95,7 +96,7 @@ def pagesize10(size10, dir10):
                     baseImg.paste(imgRH, (300, 150))
                 else:
                     baseImg.paste(imgR, (300, 150))
-                if countLen == (len(size10)):
+                if (countLen == (len(size10))) and (count == int(i.split('_')[1])) :
                     baseImg.save(dir10 + os.sep + baseFileName + 'NONE_NONE_' +
                     '.jpeg', dpi=(300,300))
                     baseFileName = '10x15_'
@@ -107,7 +108,7 @@ def pagesize10(size10, dir10):
                     baseImg.paste(imgRV, (50, 1560))
                 else:
                     baseImg.paste(imgR, (50, 1560))     
-                if countLen == (len(size10)):
+                if (countLen == (len(size10))) and (count == int(i.split('_')[1])):
                     baseImg.save(dir10 + os.sep + baseFileName + 'NONE_' +
                     '.jpeg', dpi=(300,300))
                     baseFileName = '10x15_'
