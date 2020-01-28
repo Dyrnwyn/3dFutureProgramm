@@ -66,9 +66,11 @@ def pagesize10(size10, dir10):
     countImg = 0  # Считаем количество фотографий на листе
     baseFileName = '10x15_'  # Начало имени файла
     count = 0
+    countLen =0
     baseSize = 1181  # Основной размер меньшей стороны
     for i in size10:
         count = 0
+        countLen += 1
         img = Image.open(dir10 + os.sep + i.split('_')[0]+'.jpg')
         x, y = img.size
         
@@ -93,21 +95,23 @@ def pagesize10(size10, dir10):
                     baseImg.paste(imgRH, (300, 150))
                 else:
                     baseImg.paste(imgR, (300, 150))
-                if size10.index(i) == (len(size10) - 1):
+                if countLen == (len(size10)):
                     baseImg.save(dir10 + os.sep + baseFileName + 'NONE_NONE_' +
                     '.jpeg', dpi=(300,300))
                     baseFileName = '10x15_'
+
             elif countImg == 2:
                 baseFileName += i.split('_')[0] + '_'
                 if x > y:
                     imgRV = imgR.transpose(Image.ROTATE_90)
                     baseImg.paste(imgRV, (50, 1560))
                 else:
-                    baseImg.paste(imgR, (50, 1560))
-                if size10.index(i) == (len(size10) - 1):
+                    baseImg.paste(imgR, (50, 1560))     
+                if countLen == (len(size10)):
                     baseImg.save(dir10 + os.sep + baseFileName + 'NONE_' +
-                    '.jpeg')
+                    '.jpeg', dpi=(300,300))
                     baseFileName = '10x15_'
+
             elif countImg == 3:
                 baseFileName += i.split('_')[0] + '_'
                 if x > y:
@@ -133,9 +137,11 @@ def pagesize15(pagesize15, dir15):
     countImg = 0  # Считаем количество фотографий на листе
     baseFileName = '15x20_'  # Начало имени файла
     count = 1
+    countLen = 0
     baseSize = 1700  # Основной размер меньшей стороны
     for i in pagesize15:
-        count = 0             
+        count = 0   
+        countLen += 1          
         img = Image.open(dir15 + os.sep + i.split('_')[0] + '.jpg')
 
         x, y = img.size
@@ -160,7 +166,7 @@ def pagesize15(pagesize15, dir15):
                     basImg.paste(imgRH, (34, 40))
                 else:
                     basImg.paste(imgR, (34, 40))
-                if pagesize15.index(i) == (len(pagesize15) - 1):
+                if countLen == (len(pagesize15)):
                     basImg.save(dir15 + os.sep + baseFileName + "NONE_.jpeg",
                                 dpi=(300, 300))
             else:
@@ -204,7 +210,7 @@ def pagesize20(size20, dir20):
         else:
             baseImg.paste(imgR, (35, 50))
 
-        baseFileName + = i 
+        baseFileName = baseFileName + i + "_" + str(countImg20)
         baseImg.save(dir20 + os.sep + baseFileName + ".jpeg", dpi=(300,300))
 
 
