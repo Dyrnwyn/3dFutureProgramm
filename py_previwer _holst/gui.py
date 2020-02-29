@@ -2,37 +2,34 @@ import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QFileDialog,
                              QLineEdit, QGridLayout, QProgressBar, QMessageBox,
                              QGroupBox, QMenuBar)
-import combinator
+import previewer
 import os
-
-
-# 11
+#11
 class guiInterface(QWidget):
     """docstring for  guiInterface"""
-
     def __init__(self):
         super().__init__()
         self.initUi()
 
     def initUi(self):
         self.setGeometry(0, 0, 400, 100)
-        self.setWindowTitle("Комбинатор фото")
+        self.setWindowTitle("Превьювер")
         self.move(650, 490)
 
         self.grpboxPath = QGroupBox("Выберите объект", self)
-        self.grpboxObjectName = QGroupBox("Тип файла", self)
+        self.grpboxObjectName = QGroupBox("Имя объекта для вывода в pdf", self)
 
-        self.btn = QPushButton('Компоновка', self)
+        self.btn = QPushButton('Старт', self)
         self.rbtn = QPushButton('Обзор', self)
-        self.qbtn = QPushButton('Разрезать', self)
+        self.qbtn = QPushButton('Выход', self)
         self.le = QLineEdit(self)
         self.leObjectName = QLineEdit(self)
-        self.leObjectName.setText("jpeg")
         self.prgBar = QProgressBar(self)
         self.prgBar.setMaximum(100)
         self.rbtn.clicked.connect(self.getPath)
-        self.qbtn.clicked.connect(self.cropImg)
+        self.qbtn.clicked.connect(self.close)
         self.btn.clicked.connect(self.generatePreview)
+        self.le.textChanged.connect(self.getObjectName)
         self.msgBox = QMessageBox(self)
         self.msgBox.setText("Готово")
 
@@ -47,7 +44,7 @@ class guiInterface(QWidget):
 
         grid = QGridLayout()
         grid.setSpacing(10)
-
+        
         grid.addWidget(self.prgBar, 2, 0, 1, 2)
         grid.addWidget(self.grpboxPath, 3, 0, 1, 2)
         grid.addWidget(self.grpboxObjectName, 4, 0, 1, 2)
@@ -60,34 +57,33 @@ class guiInterface(QWidget):
     def getPath(self):
         path = QFileDialog.getExistingDirectory()
         self.le.setText(path)
+        self.leObjectName.setText(path.split("/")[-1])
 
-
+    def getObjectName(self):
+        path = self.le.text()
+        self.leObjectName.setText(path.split("\\")[-1])
 
     def generatePreview(self):
         folder = self.le.text()
         os.chdir(folder)
+        txtFl = previewer.searchFl("txt", folder)
+        previewer.rename_psd_file(txtFl)
+        previewer.removeOldPdf(self.le.text().split("/")[-1] + ".pdf", folder)
+        previewer.createTmpDir()
         self.prgBar.setValue(5)
-        jpgFl = combinator.searchFl(self.leObjectName.text(), folder)
+        psdFl = previewer.searchFl("psd", folder)
         self.prgBar.setValue(10)
-        photoH,photoV = combinator.listHVPhoto(jpgFl)
-        combinator.createFileForRemoveBGH(photoH)
-        self.prgBar.setValue(50)
-        combinator.createFileForRemoveBGV(photoV)
+        previewer.convertPsd(psdFl, previewer.tmpDir)
+        self.prgBar.setValue(60)
+        jpgFl = previewer.searchFl("jpeg", previewer.tmpDir)
+        self.prgBar.setValue(70)
+        dictOfClass = previewer.createDictClass(jpgFl)
+        self.prgBar.setValue(80)
+        previewer.generatePDF(dictOfClass, self.leObjectName.text())
+        self.prgBar.setValue(95)
+        previewer.removeTmpDir()
         self.prgBar.setValue(100)
         self.msgBox.exec_()
-
-    def cropImg(self):
-        folder = self.le.text()
-        os.chdir(folder)
-        self.prgBar.setValue(5)
-        jpgFl = combinator.searchFl("png", folder)
-        self.prgBar.setValue(10)
-        photoH,photoV = combinator.listHVPhotoForCrop(jpgFl)
-        self.prgBar.setValue(20)
-        combinator.cropImage(photoH, photoV)
-        self.prgBar.setValue(100)
-        self.msgBox.exec_()
-
 
 
 if __name__ == '__main__':
