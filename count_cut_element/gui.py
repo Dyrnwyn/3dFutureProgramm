@@ -17,7 +17,7 @@ class guiInterface(QWidget):
     def initUi(self):
         
         self.setGeometry(0, 0, 400, 100)
-        self.setWindowTitle("cup_combinator")
+        self.setWindowTitle("Вырезка элемента")
         self.move(650, 490)
 
         self.grpboxPath = QGroupBox("Выберите объект", self)

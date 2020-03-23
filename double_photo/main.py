@@ -27,7 +27,7 @@ class guiInterface(QWidget):
         self.qbtn = QPushButton('Разрезать', self)
         self.le = QLineEdit(self)
         self.leObjectName = QLineEdit(self)
-        self.leObjectName.setText("jpeg")
+        self.leObjectName.setText("jpg")
         self.prgBar = QProgressBar(self)
         self.prgBar.setMaximum(100)
         self.rbtn.clicked.connect(self.getPath)
