@@ -33,8 +33,10 @@ def renameJPG(xlsxFL):
         fileName = ws["C"  + str(row)].value
         for i in listofFiles:
             if fileName in i:
-                shutil.copy(i, fileName + "-" + name + ".jpg")
-                break
+                if i[-4:] == ".png":
+                    shutil.copy(i, fileName + "-" + name + ".png")
+                else:
+                    shutil.copy(i, fileName + "-" + name + ".jpg")
         row += 1
 
 # def listHVPhoto(fl):
