@@ -42,6 +42,7 @@ def resize_image(fileName):
 
 
 def renameJPG(xlsxFL):
+    print(xlsxFL)
     xlFile = openpyxl.load_workbook(xlsxFL, read_only=True)
     ws = xlFile["Фото"]
     listofFiles = find_files()
@@ -51,7 +52,8 @@ def renameJPG(xlsxFL):
         fileName = ws["C"  + str(row)].value
         for i in listofFiles:
             if fileName in i:
-                img = resize_image(i)
+                #img = resize_image(i)
+                img = Image.open(i)
                 if i[-4:] == ".png":
                     img.save(fileName + "-" + name + ".png", dpi=(300,300), compress_level=2)
                 else:
