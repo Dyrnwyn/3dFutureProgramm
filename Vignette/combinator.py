@@ -2,6 +2,7 @@ import re
 import os
 import shutil
 import openpyxl
+from PIL import Image, ExifTags
 
 def searchFl(flExt, fldr=""):
     # Во временно директории ищем все jpeg файлы
@@ -22,6 +23,23 @@ def find_files():
             listofFiles.append(element.name)
     return listofFiles
 
+def resize_image(fileName):
+    baseSize = 1500
+    img = Image.open(fileName)
+    #info = img._getexif()
+    #print (info)
+    #for tag, value in info
+    x, y = img.size
+    if x > y:
+        height = baseSize
+        width = int(height / y * x)
+        return img.resize((width, height), Image.BICUBIC)
+    else:
+        width = baseSize
+        height = int(width / x * y)
+        return img.resize((width, height), Image.BICUBIC)
+
+
 
 def renameJPG(xlsxFL):
     xlFile = openpyxl.load_workbook(xlsxFL, read_only=True)
@@ -33,10 +51,11 @@ def renameJPG(xlsxFL):
         fileName = ws["C"  + str(row)].value
         for i in listofFiles:
             if fileName in i:
+                img = resize_image(i)
                 if i[-4:] == ".png":
-                    shutil.copy(i, fileName + "-" + name + ".png")
+                    img.save(fileName + "-" + name + ".png", dpi=(300,300), compress_level=2)
                 else:
-                    shutil.copy(i, fileName + "-" + name + ".jpg")
+                    img.save(fileName + "-" + name + ".jpg", dpi=(300,300), quality=98)
         row += 1
 
 # def listHVPhoto(fl):
