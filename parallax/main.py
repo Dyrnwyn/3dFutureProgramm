@@ -70,6 +70,8 @@ class guiInterface(QWidget):
         divlist = combinator.create_list_div()
         self.prgBar.setValue(50)
         combinator.insert_div_in_html(divlist)
+        self.prgBar.setValue(100)
+        self.msgBox.show()
 
 
 

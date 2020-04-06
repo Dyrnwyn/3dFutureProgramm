@@ -62,7 +62,7 @@ def insert_div_in_html(divList):
     for i in divList:
         divTag = soup.new_tag("div")
         divTag['data-depth']=0.2
-        imgTag = soup.new_tag("img", href="img/" + i)
+        imgTag = soup.new_tag("img", src="img/" + i)
         divTag.append(imgTag)
         tagDivScene.insert(count, divTag)
         count += 1
