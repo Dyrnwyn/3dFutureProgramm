@@ -39,30 +39,80 @@ def resize_image(fileName):
         height = int(width / x * y)
         return img.resize((width, height), Image.BICUBIC)
 
+# def renameJPG(xlsxFL, psdFiles):
+#     print(xlsxFL)
+#     xlFile = openpyxl.load_workbook(xlsxFL, read_only=True)
+#     ws = xlFile["Фото"]
+#     for f in psdFiles:
+#         row = 11
+#         while ws["C"+ str(row)].value != None:
+#             name = ws["E" + str(row)].value + "_" + ws["C" + str(row)].value + "_" + ws["D" + str(row)].value
+#             if name in f:
+#                 name_with_price = ""
+#                 split_file_name = f.split("_")
+#                 split_file_name[8] = ws["K" + str(row)].value
+#                 for i in split_file_name:
+#                     print(i)
+#                     if "psd" in i:
+#                         name_with_price = name_with_price + i
+#                     else:
+#                         name_with_price = name_with_price + i + "_"
+#                 os.rename(f, name_with_price)
+#                 # if fileName in i:
+#                 #     print (fileName)
+#                 #     #img = resize_image(i)
+#                 #     img = Image.open(i)
+#                 #     if i[-4:] == ".png":
+#                 #         img.save(fileName + "-" + name + ".png", dpi=(300,300), compress_level=2)
+#                 #     else:
+#                 #         img.save(fileName + "-" + name + ".jpg", dpi=(300,300), quality=98)
+#             row += 1
 
 
-def renameJPG(xlsxFL):
-    print(xlsxFL)
-    xlFile = openpyxl.load_workbook(xlsxFL, read_only=True)
-    ws = xlFile["Фото"]
-    listofFiles = find_files()
-    print (listofFiles)
-    row = 11
-    while ws["A"+ str(row)].value != None:
-        name = ws["A" + str(row)].value
-        print(name)
-        fileName = ws["D"  + str(row)].value
-        for i in listofFiles:
-            print(fileName)
-            if fileName in i:
-                print (fileName)
-                #img = resize_image(i)
-                img = Image.open(i)
-                if i[-4:] == ".png":
-                    img.save(fileName + "-" + name + ".png", dpi=(300,300), compress_level=2)
-                else:
-                    img.save(fileName + "-" + name + ".jpg", dpi=(300,300), quality=98)
-        row += 1
+
+def renameJPG(psdFiles):
+    for f in psdFiles:
+        print(f)
+        img = Image.open(f)
+        img.verify()
+        print(img._getexif())
+        # file = open(txtFL, 'r')
+        # for line in file:
+        #     if line[1] == "$":
+        #        split_file_name = line.split(";")
+        #        name = split_file_name[6] +"_"+ split_file_name[4] +"_"+ split_file_name[5]
+        #        if name in f:
+        #            split_psd_filename = f.split("_")
+        #            split_psd_filename[8] = split_file_name[10]
+        #            os.rename(f,"_".join(split_psd_filename)) 
+        #     else:
+        #         pass
+        # file.close()
+
+
+        # row = 11
+        # while ws["C"+ str(row)].value != None:
+        #     name = ws["E" + str(row)].value + "_" + ws["C" + str(row)].value + "_" + ws["D" + str(row)].value
+        #     if name in f:
+        #         name_with_price = ""
+        #         split_file_name = f.split("_")
+        #         split_file_name[8] = ws["K" + str(row)].value
+        #         for i in split_file_name:
+        #             print(i)
+        #             if "psd" in i:
+        #                 name_with_price = name_with_price + i
+        #             else:
+        #                 name_with_price = name_with_price + i + "_"
+        #         os.rename(f, name_with_price)
+        #         # if fileName in i:
+        #         #     print (fileName)
+        #         #     #img = resize_image(i)
+        #         #     img = Image.open(i)
+        #         #     if i[-4:] == ".png":
+        #         #         img.save(fileName + "-" + name + ".png", dpi=(300,300), compress_level=2)
+        #         #     else:
+        #         #         img.save(fileName + "-" + name + ".jpg", dpi=(300,300), quality=98)
+        #     row += 1
 
 # def listHVPhoto(fl):
 #     photoH = []
